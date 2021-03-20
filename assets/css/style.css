@@ -1,0 +1,16 @@
+.bg-image{
+  background-image: url('../pexels-thought-catalog-904616.jpg');
+  background-size: cover;
+  display: flex;
+}
+
+.bg-mask {
+  width: ;
+  height: 100%;
+  background: rgba(255,255,255,0.5);
+
+}
+
+.title{
+  text-align: center;
+}
