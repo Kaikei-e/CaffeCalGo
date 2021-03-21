@@ -9,6 +9,7 @@
   <style type="text/css" media="screen">
     @import url("/assets/css/style.css");
   </style>
+  <script src="../../assets/scripts/main.js"></script>
   <title>CaffeCalGo</title>
 </head>
 <body class="bg-image">
@@ -17,19 +18,13 @@
       <h1 class="title">CaffeCalGo: Calculate caffeine decay</h1>
       <div class="drink-num">
         <p>Enter the number of drinks or pills you want to calculate.</p>
-        <form action="/" method="POST">
-          <input type="number" min="1" class="drinkNum" name="drinkNum">
+        <form action="/">
+          <input type="number" min="1" name="drinkNum">
           <input type="submit">
         </form>
       </div>
       <div>
-        <p>{{.number }}</p>
-      </div>
-      <div id="Drinks">
-        {{ range .number }}
-        <p>{{ . }}</p>
-        <input type="datetime-local">
-        {{ end }}
+        <p>{{ .number }}</p>
       </div>
 
     </div>

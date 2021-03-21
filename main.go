@@ -2,12 +2,11 @@ package main
 
 import (
 	"net/http"
-
+	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	var drinkNum = 0
 
 
 	router := gin.Default()
@@ -16,13 +15,18 @@ func main() {
 
 
 	router.GET("/", func(ctx *gin.Context){
-		ctx.HTML(200, "index.tmpl", gin.H{})
+		drinkNumber := ""
+		ctx.HTML(200, "index.tmpl", gin.H{
+			"number": drinkNumber,
+		})
 	})
 
 	router.POST("/", func(ctx *gin.Context) {
-		ctx.HTML(http.StatusOK, "index.tmpl", gin.H{
-			"title": "CaffeCalGo",
-			"number": drinkNum, 
+		drinkNumber := ctx.PostForm("drinkNum")
+		fmt.Printf(drinkNumber)		
+
+		ctx.HTML(http.StatusOK, "drinks.tmpl", gin.H{
+			"number": drinkNumber, 
 		})
 	})
 
