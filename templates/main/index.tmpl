@@ -16,22 +16,22 @@
     <div class="bg-mask">
       <h1 class="title">CaffeCalGo: Calculate caffeine decay</h1>
       <div class="drink-num">
-        <p>Enter the number of drinks or pills you want to calculate.</p>
         <form action="/" method="POST">
+          <label>Enter the number of drinks or pills you want to calculate.</label><br />
           <input type="number" min="1" class="drinkNum" name="drinkNum">
           <input type="submit">
         </form>
       </div>
+      <br />
       <div>
         <p>{{.number }}</p>
       </div>
-      <div id="Drinks">
+      <div id="drinks">
         {{ range .number }}
         <p>{{ . }}</p>
         <input type="datetime-local">
         {{ end }}
       </div>
-
     </div>
     
   </div>
