@@ -18,7 +18,8 @@ func main() {
 
 
 	router.GET("/", func(ctx *gin.Context){
-		drinkNumber := ""
+		drinkNumber := ctx.PostForm("drinkNum")
+		drinkNumber = ""
 		ctx.HTML(200, "index.tmpl", gin.H{
 			"number": drinkNumber,
 		})
@@ -34,7 +35,7 @@ func main() {
 		fmt.Printf(string(rune(drinkNum)))		
 
 		var drinksRange []int
-		for i := 0; i < drinkNum; i++{
+		for i := 1; i <= drinkNum; i++{
 			drinksRange = append(drinksRange, i)
 		}
 
