@@ -8,6 +8,16 @@ footer{
   bottom: 0;
 }
 
+.charStyle{
+  color: rgb(61, 44, 21); 
+  font-weight:bold;
+}
+
+.submitButton{
+  display: block;
+  margin-top: 20px;
+}
+
 .bg-image{
   background-image: url("/static/cup_books.jpg") ;
   background-size: cover;

@@ -12,18 +12,24 @@
 
 <body>
   <div class="bg-image">
-    <div class="opaque-bg">
-      <p style="color: rgb(75, 53, 25);">The drinks calculated are {{ .numOfDrinks }}</p>
+    <div class="opaque-bg charStyle">
+      <p>The drinks calculated are {{ .numOfDrinks }}</p>
+      <p>Method 1: Enter the total amount of caffeine. Method 2: Enter the amount of caffeine in mg per 100 ml.</p>
+      <p>Don't worry about the time series, just enter the time as well.</p>
+
       <form>
-      
-      {{ range .logList }}
-      <p>Drink number is {{.Number}}</p>
-        <select name="calMethods">
-          <option value="1">Method 1</option>
-          <option value="2">Method 2</option>
-        </select>
-        <input type="number" name="caffeMg">
-      {{ end }}
+        {{ range .logList }}
+        <div>
+          <label>Drink number is {{.Number}}</label>
+          <select name="calMethods">
+            <option value="1">Method 1</option>
+            <option value="2">Method 2</option>
+          </select>
+          <input type="number" name="caffeMg">  
+        </div>
+        <br>
+        {{ end }}
+        <input type="submit" class="submitButton">
       </form>    
     </div>
   </div>
