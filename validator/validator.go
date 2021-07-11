@@ -22,6 +22,14 @@ func Validator(ctx *gin.Context){
 		})
 	}
 
+	if numOfDrinks > 10 {
+		invalidValue := true
+		
+		ctx.HTML(http.StatusOK, "index.html", gin.H{
+			"invalidValue": invalidValue,
+		})
+	}
+
 	
 
 	ctx.HTML(http.StatusOK, "drinks.html", gin.H{
