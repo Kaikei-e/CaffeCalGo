@@ -14,6 +14,17 @@
   <div class="bg-image">
     <div class="opaque-bg">
       <p style="color: rgb(75, 53, 25);">The drinks calculated are {{ .numOfDrinks }}</p>
+      <form>
+      
+      {{ range .logList }}
+      <p>Drink number is {{.Number}}</p>
+        <select name="calMethods">
+          <option value="1">Method 1</option>
+          <option value="2">Method 2</option>
+        </select>
+        <input type="number" name="caffeMg">
+      {{ end }}
+      </form>    
     </div>
   </div>
 </body>

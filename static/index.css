@@ -3,17 +3,23 @@ body, html{
   padding: 0;
 }
 
+footer{
+  position: absolute;
+  bottom: 0;
+}
 
 .bg-image{
   background-image: url("/static/cup_books.jpg") ;
-  background-repeat: no-repeat;
   background-size: cover;
-  padding-top: 66.66%;
+  width: 1600px;
+  height: 1000px;
+  resize: none;
 }
 .opaque-bg{
+  
   height: 100%;
   padding: 30px;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.4);
 }
 
 

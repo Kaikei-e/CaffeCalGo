@@ -1,7 +1,7 @@
 package main
 
 import (
-	"caffecalgo/validator"
+	drinkvalidator "caffecalgo/drinkValidator"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -23,9 +23,9 @@ func main() {
 		})
 	})
 
-	router.POST("/", validator.Validator)
+	router.POST("/", drinkvalidator.DrinkNum)
 
-	router.POST("/drinks", validator.Validator)
+	router.POST("/drinks", drinkvalidator.DrinkNum)
 
 
   

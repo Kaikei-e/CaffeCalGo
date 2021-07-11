@@ -1,4 +1,4 @@
-package validator
+package drinkvalidator
 
 import (
 	//"fmt"
@@ -9,7 +9,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Validator(ctx *gin.Context){
+type CaffeLogger struct{
+	Number int
+	Method int
+	CaffeineMg int
+}
+
+func DrinkNum(ctx *gin.Context){
 	numOfDrinksStr := ctx.PostForm("numOfDrinks")
 
 	numOfDrinks, err := strconv.Atoi(numOfDrinksStr)
@@ -30,9 +36,14 @@ func Validator(ctx *gin.Context){
 		})
 	}
 
-	
+	logList := []CaffeLogger{}
+
+	for i := 1; i <= numOfDrinks; i++ {
+		logList = append(logList, CaffeLogger{i, 1, 0})
+	}
 
 	ctx.HTML(http.StatusOK, "drinks.html", gin.H{
 		"numOfDrinks": numOfDrinks,
+		"logList": logList,
 	})
 }
