@@ -1,6 +1,7 @@
 package main
 
 import (
+	"caffecalgo/validator"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -11,17 +12,19 @@ func main() {
 
 	router.LoadHTMLGlob("templates/*")
 	router.Static("/static", "static")
+
+	router.NoRoute(http.StatusMovedPermanently, )
 	
 	router.GET("/", func (c *gin.Context)  {
 		c.HTML(http.StatusOK, "index.html", gin.H{
+
 		})
 	})
 
-	router.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
+	router.POST("/", validator.Validator)
+
+	router.POST("/drinks", validator.Validator)
+
 
   
 	router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")

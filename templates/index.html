@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,9 +13,12 @@
 <body>
   <div class="bg-image">
     <div class="opaque-bg">
-      <form action="/" method="POST">
-        <label class="input-form" style="color: rgba(56, 39, 19, 0.959);">How many drinks did you take ?</label>
-        <input class="input-form" type="number" required>
+      <form action="/drinks" method="POST">
+        <label class="input-form" style="color: rgba(56, 39, 19, 0.959);">How many drinks did you take ? Max value is 10.</label>
+        <input class="input-form" type="number" required name="numOfDrinks">
+        {{ if .invalidValue }}
+        <p>Invalid value</p>
+        {{ end }}
         <input class="input-form" type="submit">
       </form>
     </div>
