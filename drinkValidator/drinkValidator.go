@@ -47,7 +47,7 @@ func DrinkNum(ctx *gin.Context){
 
 	logList := []CaffeLogger{}
 
-	for i := 1; i <= numOfDrinks; i++ {
+	for i := 0; i < numOfDrinks; i++ {
 		logList = append(logList, CaffeLogger{i, 1, 0, 0, time.Now().Format("2006/01/23 23:45")})
 	}
 
