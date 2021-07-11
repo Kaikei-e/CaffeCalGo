@@ -1,17 +1,53 @@
 package calculator
 
 import (
+	drinkvalidator "caffecalgo/drinkValidator"
+	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
 func CaffeCalMethod(ctx *gin.Context){
+ 	caffeLogs := []drinkvalidator.CaffeLogger{}
+
+	numOfDrinksStr := ctx.PostForm("numOfDrinks")
+	numOfDrinks, err := strconv.Atoi(numOfDrinksStr)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	for i := 1; i <= numOfDrinks; i++ {
+		methodStr := ctx.PostForm("calMethods" + strconv.Itoa(i))
+		methodInt, err2 := strconv.Atoi(methodStr)
+		if err2 != nil {
+			log.Fatal(err2)
+		}
+
+		caffeMgStr := ctx.PostForm("caffeMg" + strconv.Itoa(i))
+		caffeMgInt, err3 := strconv.Atoi(caffeMgStr)
+		if err3 != nil {
+			log.Fatal(err3)
+		}
 
 
+		amountStr := ctx.PostForm("amount" + strconv.Itoa(i))
+		amountInt, err4 := strconv.Atoi(amountStr)
+		if err4 != nil {
+			log.Fatal(err4)
+		}
+
+		caffeLogs[i].Number = i
+		caffeLogs[i].Method = methodInt
+		caffeLogs[i].CaffeineMg = caffeMgInt
+		caffeLogs[i].Amount = amountInt
+
+	}
 
 	
-	ctx.HTML(http.StatusOK, "calculatedPage.html", gin.H{
 
+	ctx.HTML(http.StatusOK, "calculatedPage.html", gin.H{
+		
 	})
 }

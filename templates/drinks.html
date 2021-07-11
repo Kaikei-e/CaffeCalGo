@@ -25,14 +25,14 @@
           <label>Drink number is {{.Number}}</label>
           <input type="hidden" value="{{ .Number }}" name="numDrinks">
           <input type="datetime-local" required>
-          <select name="calMethods" id="calMethods" name="calMethods">
+          <select name="calMethods{{.Number}}" id="calMethods">
             <option value="1">Method 1</option>
             <option value="2">Method 2</option>
           </select>
           <label>Caffeine mg : </label>
-          <input type="number" name="caffeMg" min="0" required value="{{ .CaffeineMg}}">
+          <input type="number" name="caffeMg{{.Number}}" min="0" required>
           <label>Drink amount : </label>
-          <input type="number" name="amount" min="0" required value="{{ .Amount }}">
+          <input type="number" name="amount{{.Number}}" min="0" required>
         </div>
         <br>
         {{ end }}

@@ -10,12 +10,14 @@ import (
 )
 
 type CaffeLogger struct{
-	Number int `form:"numDrinks"`
-	Method int `form:"calMethods"`
-	CaffeineMg int `form:"caffeMg"`
-	Amount int `form:"amount"`
+	Number int `json:"numDrinks"`
+	Method int `json:"calMethods"`
+	CaffeineMg int `json:"caffeMg"`
+	Amount int `json:"amount"`
 
 }
+
+
 
 func DrinkNum(ctx *gin.Context){
 	numOfDrinksStr := ctx.PostForm("numOfDrinks")
@@ -49,3 +51,6 @@ func DrinkNum(ctx *gin.Context){
 		"logList": logList,
 	})
 }
+
+
+
