@@ -11,7 +11,7 @@ import (
 )
 
 func CaffeCalMethod(ctx *gin.Context){
- 	caffeLogs := []drinkvalidator.CaffeLogger{}
+ 	caffeLogs := make([]drinkvalidator.CaffeLogger, 1, )
 	 
 	//t := time.Time{}
 	//layout := "2006/01/02 23:45"
@@ -54,12 +54,15 @@ func CaffeCalMethod(ctx *gin.Context){
 		}
 
 		datetimeStr := ctx.PostForm("datetime" + strconv.Itoa(i))
+		var	caffeLogger drinkvalidator.CaffeLogger
 
-		caffeLogs[i].Number = i
-		caffeLogs[i].Method = methodInt
-		caffeLogs[i].CaffeineMg = caffeMgInt
-		caffeLogs[i].Amount = amountInt
-		caffeLogs[i].Datetime = datetimeStr
+		caffeLogger.Number = i
+		caffeLogger.Method = methodInt
+		caffeLogger.CaffeineMg = caffeMgInt
+		caffeLogger.Amount = amountInt
+		caffeLogger.Datetime = datetimeStr
+
+		caffeLogs = append(caffeLogs, caffeLogger)
 
 		fmt.Println(caffeLogs[i])
 
