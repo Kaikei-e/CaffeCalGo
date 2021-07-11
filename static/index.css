@@ -1,0 +1,23 @@
+body, html{
+  margin: 0;
+  padding: 0;
+}
+
+
+.bg-image{
+  background-image: url("/static/cup_books.jpg") ;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 66.66%;
+}
+.opaque-bg{
+  height: 100%;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+
+.input-form{
+  display: block;
+  margin: 10px;
+}
