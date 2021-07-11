@@ -2,6 +2,7 @@ package calculator
 
 import (
 	drinkvalidator "caffecalgo/drinkValidator"
+	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -11,6 +12,10 @@ import (
 
 func CaffeCalMethod(ctx *gin.Context){
  	caffeLogs := []drinkvalidator.CaffeLogger{}
+	 
+	//t := time.Time{}
+	//layout := "2006/01/02 23:45"
+
 
 	numOfDrinksStr := ctx.PostForm("numOfDrinks")
 	numOfDrinks, err := strconv.Atoi(numOfDrinksStr)
@@ -38,14 +43,19 @@ func CaffeCalMethod(ctx *gin.Context){
 			log.Fatal(err4)
 		}
 
+		datetimeStr := ctx.PostForm("datetime" + strconv.Itoa(i))
+
 		caffeLogs[i].Number = i
 		caffeLogs[i].Method = methodInt
 		caffeLogs[i].CaffeineMg = caffeMgInt
 		caffeLogs[i].Amount = amountInt
+		caffeLogs[i].Datetime = datetimeStr
+
+		fmt.Println(caffeLogs[i])
 
 	}
 
-	
+
 
 	ctx.HTML(http.StatusOK, "calculatedPage.html", gin.H{
 		

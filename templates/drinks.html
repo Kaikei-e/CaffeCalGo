@@ -24,7 +24,7 @@
         <div>
           <label>Drink number is {{.Number}}</label>
           <input type="hidden" value="{{ .Number }}" name="numDrinks">
-          <input type="datetime-local" required>
+          <input type="datetime-local" name="datetime{{ .Number }}" required>
           <select name="calMethods{{.Number}}" id="calMethods">
             <option value="1">Method 1</option>
             <option value="2">Method 2</option>
