@@ -10,9 +10,11 @@ import (
 )
 
 type CaffeLogger struct{
-	Number int
-	Method int
-	CaffeineMg int
+	Number int `form:"numDrinks"`
+	Method int `form:"calMethods"`
+	CaffeineMg int `form:"caffeMg"`
+	Amount int `form:"amount"`
+
 }
 
 func DrinkNum(ctx *gin.Context){
@@ -39,7 +41,7 @@ func DrinkNum(ctx *gin.Context){
 	logList := []CaffeLogger{}
 
 	for i := 1; i <= numOfDrinks; i++ {
-		logList = append(logList, CaffeLogger{i, 1, 0})
+		logList = append(logList, CaffeLogger{i, 1, 0, 0})
 	}
 
 	ctx.HTML(http.StatusOK, "drinks.html", gin.H{
