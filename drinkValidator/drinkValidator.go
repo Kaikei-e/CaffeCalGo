@@ -15,7 +15,7 @@ type CaffeLogger struct{
 	Method int `json:"calMethods"`
 	CaffeineMg int `json:"caffeMg"`
 	Amount int `json:"amount"`
-	Datetime string
+	Datetime time.Time
 }
 
 type CaffeLogs struct{
@@ -48,10 +48,10 @@ func DrinkNum(ctx *gin.Context){
 	logList := []CaffeLogger{}
 
 	for i := 0; i < numOfDrinks; i++ {
-		logList = append(logList, CaffeLogger{i, 1, 0, 0, time.Now().Format("2006/01/23 23:45")})
+		logList = append(logList, CaffeLogger{i, 1, 0, 0, time.Now()})
 	}
 
-	
+
 
 	ctx.HTML(http.StatusOK, "drinks.html", gin.H{
 		"numOfDrinks": numOfDrinks,

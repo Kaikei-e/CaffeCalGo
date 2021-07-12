@@ -26,9 +26,15 @@ func main() {
 	router.POST("/", drinkvalidator.DrinkNum)
 
 	router.POST("/drinks", drinkvalidator.DrinkNum)
-	router.POST("/calculated", calculator.CaffeCalMethod)
+	router.POST("/calculated", func(c *gin.Context) {
+		var drinkLogs []drinkvalidator.CaffeLogger
+		
+		drinkLogs = calculator.DateSorter(calculator.DateSorter(calculator.CaffeCalMethod(c)))
+
+
+	})
 
 
   
-	router.Run(":8085") // listen and serve on 0.0.0.0:8085 (for windows "localhost:8080")
+	router.Run(":8085") // listen and serve on 0.0.0.0:8085 (for windows "localhost:8085")
 }

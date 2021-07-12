@@ -4,17 +4,16 @@ import (
 	drinkvalidator "caffecalgo/drinkValidator"
 	"fmt"
 	"log"
-	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
 
-func CaffeCalMethod(ctx *gin.Context){
+func CaffeCalMethod(ctx *gin.Context) []drinkvalidator.CaffeLogger {
  	caffeLogs := []drinkvalidator.CaffeLogger{}
-	 
-	//t := time.Time{}
-	//layout := "2006/01/02 23:45"
+	
+	layout := "2006-01-02 15:04"
 
 
 	numOfDrinksStr := ctx.PostForm("numOfDrinks")
@@ -45,13 +44,19 @@ func CaffeCalMethod(ctx *gin.Context){
 		}
 
 		datetimeStr := ctx.PostForm("datetime" + strconv.Itoa(i))
+		datetimeTime, err5 := time.Parse(layout, datetimeStr)
+		if err5 != nil {
+			log.Fatal(err5)
+		}
+
+
 		var	caffeLogger drinkvalidator.CaffeLogger
 
 		caffeLogger.Number = i
 		caffeLogger.Method = methodInt
 		caffeLogger.CaffeineMg = caffeMgInt
 		caffeLogger.Amount = amountInt
-		caffeLogger.Datetime = datetimeStr
+		caffeLogger.Datetime = datetimeTime
 
 		caffeLogs = append(caffeLogs, caffeLogger)
 
@@ -59,9 +64,6 @@ func CaffeCalMethod(ctx *gin.Context){
 
 	}
 
-
-
-	ctx.HTML(http.StatusOK, "calculatedPage.html", gin.H{
-		
-	})
+	
+	return caffeLogs
 }
