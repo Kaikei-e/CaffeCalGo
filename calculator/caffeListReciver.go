@@ -13,7 +13,7 @@ import (
 func CaffeCalMethod(ctx *gin.Context) []drinkvalidator.CaffeLogger {
  	caffeLogs := []drinkvalidator.CaffeLogger{}
 	
-	layout := "2006-01-02 15:04"
+	layout := "2006-01-02T15:04"
 
 
 	numOfDrinksStr := ctx.PostForm("numOfDrinks")
