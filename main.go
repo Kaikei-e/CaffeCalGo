@@ -27,10 +27,11 @@ func main() {
 
 	router.POST("/drinks", drinkvalidator.DrinkNum)
 	router.POST("/calculated", func(c *gin.Context) {
-		var drinkLogs []drinkvalidator.CaffeLogger
 		
-		drinkLogs = calculator.DateSorter(calculator.DateSorter(calculator.CaffeCalMethod(c)))
+		drinkLogs := calculator.DateSorter(calculator.DateSorter(calculator.CaffeCalMethod(c)))
+		calculator.CaffeDecayCals(drinkLogs)
 
+		
 
 	})
 
