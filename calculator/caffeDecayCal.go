@@ -8,25 +8,31 @@ import (
 
 type caffeineDecay struct{
 	decayCaffe float64
-	decayTime time.Time 
+	decayTime time.Time
+}
+
+type caffeineDecays struct{
+	caffeLists []caffeineDecay
 }
 
 
-func CaffeDecayCals(caffeLogs []drinkvalidator.CaffeLogger){
-	//caffeineDecays := []caffeineDecay{}
-	listLength := len(caffeLogs)
-	timeDuration := []time.Duration{}
+func CaffeDecayCals(caffeStructs []drinkvalidator.CaffeLogger){
+	var caffeDcays caffeineDecays
+	var isTmaxed bool
+
+	listLength := len(caffeStructs)
+	timeLimit := []time.Duration{}
 	j := 0
 
 
 	for i := 0; i < listLength -1; i++ {
 		j += 1
-		periodOfTime := caffeLogs[j].Datetime.Sub(caffeLogs[i].Datetime)
+		periodOfTime := caffeStructs[j].Datetime.Sub(caffeStructs[i].Datetime)
 
-		timeDuration = append(timeDuration, periodOfTime)
+		timeLimit = append(timeLimit, periodOfTime)
 	}
 
-	log.Println(timeDuration)
+	log.Println(timeLimit)
 
 
 	for i := 0; i < listLength - 1; i++ {
@@ -36,53 +42,59 @@ func CaffeDecayCals(caffeLogs []drinkvalidator.CaffeLogger){
 		}
 
 		if i == listLength - 2{
-			calMethodSimple(caffeLogs[i])
+			calMethodSimple(caffeStructs[i])
 		}else{
-			
-			if caffeLogs[i].Method == 1 {
-				calTmax(caffeLogs[i], timeDuration[i + 1])
-			}else if (caffeLogs[i].Method == 2){
-				calMethod2(caffeLogs[i], timeDuration[i + 1])
-			}			
+
+			if caffeStructs[i].Method == 1 {
+				caffeDcays, isTmaxed = calTmax(caffeStructs[i], timeLimit[i + 1])
+
+				if isTmaxed {
+					calDecay(caffeStructs[i], caffeDcays, timeLimit[i + 1])
+
+					break
+				}else{
+				}
+			}else if (caffeStructs[i].Method == 2){
+				//calDecay(caffeLogs[i], timeDuration[i + 1])
+			}
 		}
 
 	}
 }
 
-func calTmax(caffeStruct drinkvalidator.CaffeLogger, periodOfTime time.Duration) ([]caffeineDecay){
-	caffeineDecays := []caffeineDecay{}
+func calTmax(caffeStruct drinkvalidator.CaffeLogger, periodOfTime time.Duration) (caffeineDecays, bool){
+	var caffeDecays caffeineDecays
 	minutes := int64(periodOfTime / time.Minute)
 	TmaxVar := 1.1333
 	var caffeDe caffeineDecay
 	caffeDe.decayTime = caffeStruct.Datetime
 
-
+	var isTmax bool
 
 	for i := 0; i < int(minutes); i++ {
 		if caffeDe.decayCaffe > float64(caffeStruct.CaffeineMg) {
+			isTmax = true
 			break
 		}
 		if caffeStruct.Datetime.After(caffeDe.decayTime) {
+			isTmax = false
 			break
 		}
 
 		caffeDe.decayCaffe += 1 * TmaxVar
 		caffeDe.decayTime = caffeDe.decayTime.Add(time.Duration(1) * time.Minute)
 
-		caffeineDecays = append(caffeineDecays, caffeDe)
+		caffeDecays.caffeLists = append(caffeDecays.caffeLists, caffeDe)
 		log.Println(caffeDe.decayCaffe)
 		log.Println(caffeDe.decayTime)
 		log.Println(caffeStruct.Datetime)
 
-
-		
-
 	}
 
-	return caffeineDecays
+	return caffeDecays, isTmax
 }
 
-func calMethod2(caffeStruct drinkvalidator.CaffeLogger, periodOfTime time.Duration){
+func calDecay( caffeSt drinkvalidator.CaffeLogger, caffeDcays caffeineDecays, periodOfTime time.Duration){
 
 
 
