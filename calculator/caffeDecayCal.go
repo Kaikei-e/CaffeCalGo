@@ -130,6 +130,8 @@ func calDecay( caffeSt drinkvalidator.CaffeLogger, caffeDcays caffeineDecays, ti
 
 
 
+
+
 }
 
 func calMethodSimple(caffeStruct drinkvalidator.CaffeLogger){
